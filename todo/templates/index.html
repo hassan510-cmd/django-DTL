@@ -1,0 +1,43 @@
+{% extends 'header/header.html' %}
+{% load custom_tags %}
+
+{% block titleblock %}
+Todo
+{% endblock %}
+
+{% block bodyblock %}
+    <div class="container">
+    <h1>welcome to Todo DTL</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Content</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in tasks  %}
+    <tr>
+      <th scope="row">{{ task.id }}</th>
+      <td>{{ task.content  }}</td>
+      <td>{{ task.priority }}</td>
+      <td>{{ task.desc |tag_1}}</td>
+      <td>
+          <a href="{% url 'todo:task' task.id  %}" class="btn btn-primary">view</a>
+          <a  href="{% url 'todo:task-edit' task.id  %}" class="btn btn-warning">update</a>
+          <a href="{% url 'todo:task-del' task.id  %}" class="btn btn-danger">delete</a>
+      </td>
+    </tr>
+
+  {% endfor %}
+
+
+  </tbody>
+</table>
+    </div>
+{% endblock %}
